@@ -1,10 +1,16 @@
+import { useSelector } from 'react-redux'
+import Login from './components/Login'
+import ChatWindow from './components/ChatWindow'
 import './App.css'
 
 function App() {
-
+  const { userInfo } = useSelector((state) => state.user)
   return (
     <div className="App">
-      <h1>chatApp</h1>
+      {
+        (userInfo === null)
+         ? <Login /> : <ChatWindow />
+      }
     </div>
   )
 }
