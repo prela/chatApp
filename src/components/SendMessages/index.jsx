@@ -1,0 +1,32 @@
+import React, { useState } from 'react'
+
+const SendMessages = ({publishMessage}) => {
+  const [messageInput, setMessageInput] = useState('')
+
+  const messageInputHandler = (e) => {
+    setMessageInput(e.target.value)
+  }
+
+  const messageToPublish = (message) => {
+    return {
+      message: message
+    }
+  }
+
+  const sendMessagesHandler = (e) => {
+    e.preventDefault()
+    publishMessage(messageToPublish(messageInput))
+    setMessageInput('')
+  }
+
+  return (
+    <div>
+      <form onSubmit={sendMessagesHandler}>
+        <input type="text" id='messageInput' value={messageInput} onChange={messageInputHandler} placeholder='Enter your message' autoFocus={true} />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  )
+}
+
+export default SendMessages
