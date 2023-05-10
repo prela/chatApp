@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userInfo: null,
-  userChat: null,
+  user: {
+    info: null,
+    chat: null,
+  },
 };
 
 export const userSlice = createSlice({
@@ -11,10 +13,10 @@ export const userSlice = createSlice({
   reducers: {
     logout: () => initialState,
     login: (state, action) => {
-      state.userInfo = action.payload;
+      state.user.info = action.payload;
     },
     loadChat: (state, action) => {
-      state.userChat = action.payload;
+      state.user.chat = action.payload;
     },
   },
 });

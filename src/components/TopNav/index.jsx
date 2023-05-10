@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '/src/redux/user'
 
 const TopNav = ({drone, setDrone}) => {
-  const { userInfo } = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
   const logoutHandler = () => {
@@ -20,7 +20,7 @@ const TopNav = ({drone, setDrone}) => {
           <span>ChatApp</span>
         </div>
         <div className="profile">
-          <span>{userInfo.name}</span>
+          <span>{user.info.name}</span>
           <button onClick={logoutHandler}>Logout</button>
         </div>
       </header>

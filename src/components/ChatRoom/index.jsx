@@ -24,7 +24,7 @@ const ChatRoom = ({drone}) => {
 
   return (
     <>
-      <RoomHeader />
+      {/* <RoomHeader /> */}
       <Messages room={room} />
       <InfoBar />
       <SendMessages publishMessage={publishMessage} />

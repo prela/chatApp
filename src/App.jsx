@@ -4,11 +4,11 @@ import ChatWindow from './components/ChatWindow'
 import './App.css'
 
 function App() {
-  const { userInfo } = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.user)
   return (
     <div className="App">
       {
-        (userInfo === null)
+        (user.info === null)
          ? <Login /> : <ChatWindow />
       }
     </div>

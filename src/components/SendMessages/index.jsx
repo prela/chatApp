@@ -7,15 +7,9 @@ const SendMessages = ({publishMessage}) => {
     setMessageInput(e.target.value)
   }
 
-  const messageToPublish = (message) => {
-    return {
-      message: message
-    }
-  }
-
   const sendMessagesHandler = (e) => {
     e.preventDefault()
-    publishMessage(messageToPublish(messageInput))
+    publishMessage(messageInput)
     setMessageInput('')
   }
 

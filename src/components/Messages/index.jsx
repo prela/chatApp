@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import EachMessage from './EachMessage'
 
 const Messages = ({room}) => {
-  room.on('message', message => console.log('Received message:', message));
+  const [messages, setMessages] = useState([])
+
+  room.on('message', message => {
+    const {data, id, timestamp, clientId, member} = message
+
+    const newMessage = {
+      id: id,
+      time: timestamp,
+      senderId: clientId,
+      sender: member.clientData.info.name,
+      messageContent: data
+    }
+    setMessages([...messages, newMessage])
+  })
 
   return (
-    <div>Messages</div>
+    <ul>
+      {messages.map(message => <EachMessage key={message.id} message={message} />)}
+    </ul>
   )
 }
 

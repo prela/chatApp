@@ -9,17 +9,17 @@ const ChatWindow = () => {
   const [drone, setDrone] = useState(null)
   const channel_id = import.meta.env.VITE_DRONE_CHANNEL_ID //Scaledrone channel id from .env file
 
-  const { userInfo } = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!drone && userInfo.name !== '') {
+    if (!drone && user.info.name !== '') {
       const sd = new window.Scaledrone(channel_id, {
-        data: userInfo
+        data: user
       })
       setDrone(sd)
     }
-  }, [userInfo])
+  }, [user])
 
   useEffect(() => {
     if (!drone) {
@@ -30,33 +30,23 @@ const ChatWindow = () => {
         return console.error(error)
       }
       dispatch(loadChat({id: drone.clientId}))
-      console.log('User ' + userInfo.name + ' has connected to Scaledrone')
+      console.log('User ' + user.info.name + ' has connected to Scaledrone')
     })
 
     drone.on('error', (error) => console.error(error))
     drone.on('disconnect', () => {
-      console.log('User ' + userInfo.name + ' has disconnected, Scaledrone will try to reconnect soon')
+      console.log('User ' + user.info.name + ' has disconnected, Scaledrone will try to reconnect soon')
     })
     drone.on('reconnect', () => {
-      console.log('User ' + userInfo.name + ' has been reconnected')
+      console.log('User ' + user.info.name + ' has been reconnected')
     })
     drone.on('close', () => {
-      console.log('User ' + userInfo.name + ' has loged out from Scaledrone')
+      console.log('User ' + user.info.name + ' has loged out from Scaledrone')
     })
   }, [drone])
 
-  // return (
-  //   <>
-  //     <div>ChatWindow</div>
-  //   </>
-  // )
-
-  // return drone === null ? (
-  //   <span>Loading...</span>
-  //   ) : (
-
   return (
-    (drone === null || drone === undefined) ? (
+    (!drone) ? (
       <span>Loading...</span>
     ) : (
       <>
