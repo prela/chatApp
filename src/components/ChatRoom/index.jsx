@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setMessages } from "../../redux/user";
 import RoomHeader from "../RoomHeader";
 import Messages from "../Messages";
-import InfoBar from "../InfoBar";
+// import InfoBar from "../InfoBar";
 import SendMessages from "../SendMessages";
 
 const ChatRoom = ({ drone }) => {
@@ -9,7 +11,10 @@ const ChatRoom = ({ drone }) => {
   const roomName = "observable-default-room";
   const room = drone.subscribe(roomName);
 
-  const [messages, setMessages] = useState([]);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  
+  const messages = user.chat.messages
 
   useEffect(() => {
     room.on("open", (error) => {
@@ -25,11 +30,8 @@ const ChatRoom = ({ drone }) => {
     };
   }, [drone]);
 
-  // useEffect(() => {
   room.on("message", (message) => {
-    console.log("Mounted room.on message", room.name);
     const { data, id, timestamp, clientId, member } = message;
-    console.log(message);
 
     const newMessage = {
       id: id,
@@ -38,13 +40,10 @@ const ChatRoom = ({ drone }) => {
       senderId: clientId,
       sender: member.clientData.info.name,
       messageContent: data,
+      isAuthor: clientId === user.chat.id,
     };
-    setMessages((messages) => [...messages, newMessage]);
+    dispatch(setMessages(newMessage));
   });
-  // return () => {
-  //   console.log('Unmounted from room.on message', room.name);
-  // }
-  // }, [room])
 
   const publishMessage = (message) => {
     drone.publish({

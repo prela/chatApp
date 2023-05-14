@@ -34,7 +34,7 @@ const ChatWindow = () => {
         if (error) {
           return console.error(error);
         }
-        if (user.chat === null || user.chat.id !== drone.clientId) {
+        if (user.chat.id === null || user.chat.id !== drone.clientId) {
           dispatch(loadChat({ id: drone.clientId }));
         }
         console.log("User " + user.info.name + " has connected to Scaledrone");

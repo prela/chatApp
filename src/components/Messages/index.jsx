@@ -14,7 +14,7 @@ const Messages = ({ messages }) => {
       <div
         key={message.id}
         style={{
-          textAlign: message.senderId === user.chat.id ? "right" : "left",
+          textAlign: message.isAuthor ? "right" : "left",
         }}
       >
         {prevMessage && prevMessage.senderId === message.senderId ? null : (
@@ -24,7 +24,7 @@ const Messages = ({ messages }) => {
         {!nextMessage ? (
           <TimePassed time={message.time} />
         ) : (nextMessage && nextMessage.senderId !== message.senderId) ||
-          (nextMessage && nextMessage.time - message.time > 60 * 5) ? (
+          (nextMessage && nextMessage.time - message.time > 60 * 3) ? (
           <TimePassed time={message.time} />
         ) : null}
       </div>
