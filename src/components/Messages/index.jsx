@@ -1,27 +1,45 @@
-import React, { useState } from 'react'
-import EachMessage from './EachMessage'
+import React, { useLayoutEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import TimePassed from "../TimePassed";
 
-const Messages = ({room}) => {
-  const [messages, setMessages] = useState([])
+const Messages = ({ messages }) => {
+  const scrollRef = useRef(null);
+  const { user } = useSelector((state) => state.user);
 
-  room.on('message', message => {
-    const {data, id, timestamp, clientId, member} = message
+  const messagesList = messages.map((message, i, a) => {
+    const prevMessage = a[i - 1];
+    const nextMessage = a[i + 1];
 
-    const newMessage = {
-      id: id,
-      time: timestamp,
-      senderId: clientId,
-      sender: member.clientData.info.name,
-      messageContent: data
-    }
-    setMessages([...messages, newMessage])
-  })
+    return (
+      <div
+        key={message.id}
+        style={{
+          textAlign: message.isAuthor ? "right" : "left",
+        }}
+      >
+        {prevMessage && prevMessage.senderId === message.senderId ? null : (
+          <h4>{message.sender}</h4>
+        )}
+        <div>{message.messageContent}</div>
+        {!nextMessage ? (
+          <TimePassed time={message.time} />
+        ) : (nextMessage && nextMessage.senderId !== message.senderId) ||
+          (nextMessage && nextMessage.time - message.time > 60 * 3) ? (
+          <TimePassed time={message.time} />
+        ) : null}
+      </div>
+    );
+  });
+
+  useLayoutEffect(() => {
+    scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages])
 
   return (
-    <ul>
-      {messages.map(message => <EachMessage key={message.id} message={message} />)}
-    </ul>
-  )
-}
+    <div ref={scrollRef}>
+      {messagesList}
+    </div>
+  );
+};
 
-export default Messages
+export default Messages;

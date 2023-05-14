@@ -1,8 +1,8 @@
 import React from 'react'
 
-const RoomHeader = () => {
+const RoomHeader = ({title}) => {
   return (
-    <div>RoomHeader</div>
+    <div>{title}</div>
   )
 }
 

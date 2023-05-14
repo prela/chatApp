@@ -1,16 +1,8 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '/src/redux/user'
+import React from "react";
+import { useSelector } from "react-redux";
 
-const TopNav = ({drone, setDrone}) => {
-  const { user } = useSelector((state) => state.user)
-  const dispatch = useDispatch()
-
-  const logoutHandler = () => {
-    drone.close()
-    setDrone(null)
-    dispatch(logout())
-  }
+const TopNav = ({ logoutHandler }) => {
+  const { user } = useSelector((state) => state.user);
 
   return (
     <>
@@ -25,7 +17,7 @@ const TopNav = ({drone, setDrone}) => {
         </div>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default TopNav
+export default TopNav;
