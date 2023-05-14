@@ -18,7 +18,7 @@ const TimePassed = ({ time }) => {
     return () => clearInterval(interval);
   }, [passedTime]);
 
-  return <div title={DateTime}>{passedTime}</div>;
+  return <div title={DateTime} className="text-xs leading-none m-2">{passedTime}</div>;
 };
 
 export default TimePassed;
