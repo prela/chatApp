@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-const RoomHeader = ({title}) => {
+const RoomHeader = ({ title }) => {
   return (
-    <div className="relative pt-20">
-      <div className="flex flex-row justify-stretch items-center h-10 w-full sticky top-16 backdrop-blur-md backdrop-opacity-60 shadow-sm">
-        <h1 className='flex grow justify-center items-center text-xl font-semibold text-sky-500'>{title}</h1>
-      </div>
+    <div className="flex flex-row justify-strech items-center sticky top-16 h-12 w-full shadow-lg backdrop-blur-sm hover:backdrop-blur-lg">
+      <h1 className="flex grow h-full justify-center items-center text-xl font-semibold text-sky-500">
+        {title}
+      </h1>
     </div>
-  )
-}
+  );
+};
 
-export default RoomHeader
+export default RoomHeader;

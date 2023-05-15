@@ -14,7 +14,7 @@ const SendMessages = ({ publishMessage }) => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full max-w-screen-xl flex flex-row items-center h-16 px-6 py-2 shadow-2xl bg-gray-200">
+    <div className="sticky bottom-0 w-full flex flex-row items-center h-16 px-6 py-2 shadow-2xl bg-gray-200">
       <form onSubmit={sendMessagesHandler} className="flex flex-row items-center w-full">
         <input
           type="text"

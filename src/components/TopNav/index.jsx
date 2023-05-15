@@ -5,7 +5,7 @@ const TopNav = ({ logoutHandler }) => {
   const { user } = useSelector((state) => state.user);
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full max-w-screen-xl z-50 flex flex-row items-center h-16 px-6 py-2 bg-white shadow-2xl text-gray-900">
+    <header className="sticky top-0 w-full flex flex-row items-center h-16 px-6 py-2 bg-white shadow-2xl text-gray-900">
       <img src="/src/assets/chatapplogo.svg" alt="logo" className="h-full" />
       <h1 className="font-extrabold text-3xl text-center ml-3">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-sky-500">

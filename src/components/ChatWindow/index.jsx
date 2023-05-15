@@ -47,6 +47,9 @@ const ChatWindow = () => {
           );
         });
         drone.on("reconnect", () => {
+          if (user.chat.id === null || user.chat.id !== drone.clientId) {
+            dispatch(loadChat({ id: drone.clientId }));
+          }
           console.log("User " + user.info.name + " has been reconnected");
         });
         drone.on("close", () => {
@@ -61,7 +64,7 @@ const ChatWindow = () => {
   return !drone ? (
     <span>Loading...</span>
   ) : (
-    <div className="relative flex grow flex-col items-center justify-center w-screen min-h-screen overflow-hidden bg-gray-100 text-gray-800">
+    <div className="relative flex grow flex-col items-center justify-center min-h-screen">
       <TopNav logoutHandler={logoutHandler} />
       <ChatRoom drone={drone} />
     </div>

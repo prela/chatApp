@@ -22,34 +22,30 @@ const Messages = ({ messages }) => {
           <h4 className="text-xl font-semibold mb-2">{message.sender}</h4>
         )}
         <div
-          className={
-            "px-3 border " +
-            (message.isAuthor
+          className={`px-3 border ${
+            message.isAuthor
               ? " bg-sky-100 border-sky-200 "
-              : " bg-gray-200 border-gray-300 ") +
-            (!prevMessage
+              : " bg-gray-200 border-gray-300 "
+          }${
+            !prevMessage ||
+            prevMessage.senderId !== message.senderId ||
+            message.time - prevMessage.time > 60 * 2
               ? " pt-1 rounded-t-lg border-b-0 "
-              : prevMessage && prevMessage.senderId !== message.senderId
-              ? " pt-1 rounded-t-lg border-b-0 "
-              : prevMessage &&
-                prevMessage.senderId === message.senderId &&
-                prevMessage.time - message.time > 60 * 1
-              ? " pt-1 rounded-t-lg border-b-0 "
-              : " border-t-0 border-b-0 ") +
-            (!nextMessage
+              : " border-t-0 border-b-0 "
+          }${
+            !nextMessage ||
+            nextMessage.senderId !== message.senderId ||
+            nextMessage.time - message.time > 60 * 2
               ? " shadow-lg pb-1 rounded-b-lg border-t-0 "
-              : (nextMessage && nextMessage.senderId !== message.senderId) ||
-                (nextMessage && nextMessage.time - message.time > 60 * 1)
-              ? " shadow-lg pb-1 rounded-b-lg border-t-0 "
-              : "")
-          }
+              : ""
+          }`}
         >
           {message.messageContent}
         </div>
         {!nextMessage ? (
           <TimePassed time={message.time} />
-        ) : (nextMessage && nextMessage.senderId !== message.senderId) ||
-          (nextMessage && nextMessage.time - message.time > 60 * 1) ? (
+        ) : nextMessage.senderId !== message.senderId ||
+          nextMessage.time - message.time > 60 * 2 ? (
           <TimePassed time={message.time} />
         ) : null}
       </div>
@@ -62,10 +58,10 @@ const Messages = ({ messages }) => {
 
   return (
     <div
-      ref={scrollRef}
-      className="flex flex-col flex-grow w-full px-8 my-20 overflow-auto"
+      className="flex flex-col flex-grow w-full min-h-full px-8 overflow-auto"
     >
       {messagesList}
+      <div ref={scrollRef} className="scroll-mb-40" />
     </div>
   );
 };
