@@ -1,10 +1,9 @@
 import React, { useLayoutEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import Avatar from "react-nice-avatar";
 import TimePassed from "../TimePassed";
 
 const Messages = ({ messages }) => {
   const scrollRef = useRef(null);
-  const { user } = useSelector((state) => state.user);
 
   const messagesList = messages.map((message, i, a) => {
     const prevMessage = a[i - 1];
@@ -19,7 +18,14 @@ const Messages = ({ messages }) => {
         }
       >
         {prevMessage && prevMessage.senderId === message.senderId ? null : (
-          <h4 className="text-xl font-semibold mb-2">{message.sender}</h4>
+          <div
+            className={`flex items-center mb-2 ${
+              message.isAuthor ? " flex-row-reverse " : " flex-row "
+            }`}
+          >
+            <Avatar className="w-10 h-10 mx-2 z-1" {...message.avatar} />
+            <h4 className="text-2xl font-semibold">{message.sender}</h4>
+          </div>
         )}
         <div
           className={`px-3 border ${
@@ -57,9 +63,7 @@ const Messages = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div
-      className="flex flex-col flex-grow w-full min-h-full px-8 overflow-auto"
-    >
+    <div className="flex flex-col flex-grow w-full min-h-full px-8 overflow-auto my-3">
       {messagesList}
       <div ref={scrollRef} className="scroll-mb-40" />
     </div>

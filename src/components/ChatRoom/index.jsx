@@ -39,6 +39,7 @@ const ChatRoom = ({ drone }) => {
       time: timestamp,
       senderId: clientId,
       sender: member.clientData.info.name,
+      avatar: member.clientData.info.avatar,
       messageContent: data,
       isAuthor: clientId === user.chat.id,
     };
