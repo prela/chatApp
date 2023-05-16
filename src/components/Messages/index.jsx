@@ -23,7 +23,7 @@ const Messages = ({ messages }) => {
               message.isAuthor ? " flex-row-reverse " : " flex-row "
             }`}
           >
-            <Avatar className="w-10 h-10 mx-2 z-1" {...message.avatar} />
+            <Avatar className="w-10 h-10 mx-2 -z-10" {...message.avatar} />
             <h4 className="text-2xl font-semibold">{message.sender}</h4>
           </div>
         )}

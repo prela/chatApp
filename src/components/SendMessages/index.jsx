@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PaperAirplaneIcon } from "@heroicons/react/20/solid";
 
 const SendMessages = ({ publishMessage }) => {
   const [messageInput, setMessageInput] = useState("");
@@ -23,9 +24,9 @@ const SendMessages = ({ publishMessage }) => {
           onChange={messageInputHandler}
           placeholder="Enter your message"
           autoFocus={true}
-          className="flex grow items-center h-12 rounded rounded-l px-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600"
+          className="flex grow items-center h-12 rounded-l px-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600 ring-inset"
         />
-        <button type="submit" className="flex items-center justify-center h-12 px-3 bg-sky-400 rounded-r font-semibold text-lg uppercase text-sky-100 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-600">Send</button>
+        <button type="submit" className="flex items-center justify-center h-12 px-3 bg-sky-400 rounded-r font-semibold text-lg uppercase text-sky-100 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-600 ring-inset"><PaperAirplaneIcon className="w-6 h-6" /></button>
       </form>
     </div>
   );
