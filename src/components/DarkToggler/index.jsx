@@ -3,7 +3,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
 
 const DarkToggler = ({ isDark, toggleDark }) => {
   return (
-    <div className="w-6 h-6 cursor-pointer">
+    <div className="w-full cursor-pointer">
       {isDark ? (
         <SunIcon onClick={toggleDark} />
       ) : (

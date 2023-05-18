@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Login from "./components/Login";
 import ChatWindow from "./components/ChatWindow";
-import "./App.css";
 
 function App() {
   const initialIsDark = () => {

@@ -23,15 +23,15 @@ const Messages = ({ messages }) => {
               message.isAuthor ? " flex-row-reverse " : " flex-row "
             }`}
           >
-            <Avatar className="w-10 h-10 mx-2 -z-10" {...message.avatar} />
+            <Avatar className="w-10 h-10 mx-2" {...message.avatar} />
             <h4 className="text-2xl font-semibold">{message.sender}</h4>
           </div>
         )}
         <div
           className={`px-3 border ${
             message.isAuthor
-              ? " bg-sky-100 border-sky-200 "
-              : " bg-gray-200 border-gray-300 "
+              ? " bg-eastern-blue-400 border-eastern-blue-700 text-eastern-blue-50 "
+              : " bg-eastern-blue-50 border-eastern-blue-400 text-eastern-blue-700 dark:bg-eastern-blue-950 dark:border-eastern-blue-600 dark:text-eastern-blue-50 "
           }${
             !prevMessage ||
             prevMessage.senderId !== message.senderId ||

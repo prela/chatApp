@@ -5,7 +5,7 @@ import TopNav from "../TopNav";
 import ChatRoom from "../ChatRoom";
 import Loader from "../Loader";
 
-const ChatWindow = ({setDarkMode}) => {
+const ChatWindow = ({ isDark, toggleDark }) => {
   const [drone, setDrone] = useState(null);
   const channel_id = import.meta.env.VITE_DRONE_CHANNEL_ID; //Scaledrone channel id from .env file
 
@@ -65,8 +65,8 @@ const ChatWindow = ({setDarkMode}) => {
   return !drone ? (
     <Loader />
   ) : (
-    <div className="relative flex grow flex-col items-center justify-center min-h-screen">
-      <TopNav logoutHandler={logoutHandler} setDarkMode={setDarkMode} />
+    <div className="relative flex grow flex-col items-center justify-center min-h-screen bg-eastern-blue-100 text-eastern-blue-950 dark:bg-eastern-blue-900 dark:text-eastern-blue-50">
+      <TopNav logoutHandler={logoutHandler} isDark={isDark} toggleDark={toggleDark} />
       <ChatRoom drone={drone} />
     </div>
   );

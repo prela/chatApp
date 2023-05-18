@@ -29,7 +29,7 @@ const Login = ({ isDark, toggleDark }) => {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-screen min-h-screen bg-eastern-blue-100 text-eastern-blue-950 dark:bg-eastern-blue-950 dark:text-eastern-blue-50">
-      <div className="absolute top-0 right-0 p-2">
+      <div className="absolute top-0 right-0 m-2 w-6">
         <DarkToggler isDark={isDark} toggleDark={toggleDark} />
       </div>
       <div className="flex justify-center">
