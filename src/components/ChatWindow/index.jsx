@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadChat, logout } from "/src/redux/user";
 import TopNav from "../TopNav";
 import ChatRoom from "../ChatRoom";
+import Loader from "../Loader";
 
-const ChatWindow = () => {
+const ChatWindow = ({setDarkMode}) => {
   const [drone, setDrone] = useState(null);
   const channel_id = import.meta.env.VITE_DRONE_CHANNEL_ID; //Scaledrone channel id from .env file
 
@@ -62,10 +63,10 @@ const ChatWindow = () => {
   }, [drone]);
 
   return !drone ? (
-    <span>Loading...</span>
+    <Loader />
   ) : (
     <div className="relative flex grow flex-col items-center justify-center min-h-screen">
-      <TopNav logoutHandler={logoutHandler} />
+      <TopNav logoutHandler={logoutHandler} setDarkMode={setDarkMode} />
       <ChatRoom drone={drone} />
     </div>
   );
